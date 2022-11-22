@@ -1,0 +1,88 @@
+.crearRecet{
+    background-color: rgba(0, 128, 0, 0.53);
+}
+
+.crearRecet input,label{
+    display: flex;
+    flex-direction: column;
+}
+.crearRecet label{
+    color:aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.crearRecet input{
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+    border: none;
+    border-radius: 12px;
+}
+
+.crearRecet .errB{
+    background-color: rgb(101, 38, 201);
+    color: antiquewhite;
+    border: 1px solid green;
+}
+.crearRecet .okB{
+    background-color: rgba(255, 0, 0, 0.283);
+    color: rgba(250, 235, 215, 0.603);
+    border: 2px solid rgba(255, 217, 0, 0.437);
+    border-radius: 2px;
+}
+.crearRecet .okB:hover{
+    background-color: rgba(255, 0, 0, 0.283);
+    color: rgba(250, 235, 215, 0.603);
+    border: 2px solid rgba(255, 217, 0, 0.437);
+    border-radius: 2px;
+}
+.err{
+    background-color: rgba(248, 97, 97, 0.505);
+}
+.errP{
+    color: red;
+}
+
+.ok{
+    background-color: rgba(61, 243, 61, 0.508);
+}
+
+.crearRecet button{
+    background-color: greenyellow;
+    color: black;
+    border: 1px solid green;
+}
+
+.crearRecet button:hover{
+    background-color:black;
+    color: rgb(71, 228, 13);
+    border: 2px solid rgb(28, 217, 28);
+}
+.crearRecet .chek{
+    width: 30%;
+display: flex;
+flex-direction: row;
+margin-left: 30%;
+}
+.crearRecet .chek input{
+    margin-left: 10px;
+}
+.crearRecet hr{
+    background-color:rgba(240, 248, 255, 0.012);
+    display: flex;
+    flex-direction: row;
+    color: rgba(240, 248, 255, 0.012);
+}
+
+.BTN{
+    width: 100%;
+    height: 600px;
+    background-color: rgb(58, 209, 58);
+    margin: 1px;
+}
+.BTN button{
+    margin: 12px;
+    padding: 10px;
+    background-color: chartreuse;
+    border: 1px solid goldenrod;
+    border-radius: 12px;
+}

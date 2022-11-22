@@ -1,0 +1,20 @@
+.paginas input{
+    margin: 12px;
+    background-color: chartreuse;
+}
+.paginas input:focus{
+    background-color: black;
+    border: 1px chartreuse solid;
+    color: antiquewhite;
+}
+
+.paginas input:hover{
+    background-color: green;
+    color: aqua;
+}
+
+.paginas .activo{
+    background-color: rgb(7, 87, 7);
+    color: antiquewhite;
+    border: 1px solid greenyellow;
+}

@@ -1,0 +1,53 @@
+.Home{
+    background-color: black;
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+}
+.Home button{
+    margin:12px;
+    background-color: chartreuse;
+    height: 20px;
+}
+.Home button:focus{
+    background-color: rgba(225, 163, 29, 0.672);
+    color: rgb(233, 138, 14);
+    border: 1px rgba(250, 247, 34, 0.678) solid;
+}
+
+.Home button:hover{
+    background-color: rgba(0, 0, 0, 0.533);
+    color: antiquewhite;
+    border: 1px greenyellow solid;
+}
+
+.Home h1{
+    color: chartreuse;
+}
+
+.Car{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    padding: 20px;
+    border: 2px solid greenyellow;
+    border-radius: 14px;
+    text-align: center;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+.img{
+    border-radius: 12%;
+    width: 400px;
+}
+.title{
+    padding: 12px;
+}
+
+.Home ul{
+    color: cadetblue;
+}
+.Home li{
+    color: antiquewhite;
+}
