@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getReceta } from '../../Redux/Action/action.js';
+import { getRecipe } from '../../Redux/Action/action.js';
 import Card from '../house_card/houseCard.jsx';
-import Pagina from '../Paginado/Paginas.jsx';
+import Paginated from '../Paginated/Paginated.jsx'
 import './home.css';
 import { Link } from 'react-router-dom';
 
@@ -13,15 +13,15 @@ const Home = () =>{
         'A-Z' : false,
         'Z-A' : false,
         'original' : false,
-        '+Saludable' : false,
-        '-Saludable' : false, 
-        estado : 'All',
+        '+healthy' : false,
+        '-healthy' : false, 
+        state : 'All',
     });
     
     const dispatc = useDispatch();
 
     useEffect(()=>{
-        if(recet.name === '') dispatc(getReceta());
+        if(recet.name === '') dispatc(getRecipe());
     },[dispatc, recet.name]);
 
    const edit = (evento) =>{
@@ -30,21 +30,21 @@ const Home = () =>{
      setRecet((state) => ({...state, [evento.target.name] : value}))
    }; 
    
-   const enviar = (evento) =>{
+   const send = (evento) =>{
        evento.preventDefault();
-       dispatc(getReceta(recet.name))
+       dispatc(getRecipe(recet.name))
     };
 
-    const receta = useSelector((x)=> x.arr);
+    const recipe = useSelector((x)=> x.newRecipes);
 
     const select = (e) =>{
          e.preventDefault();
          const diet = e.target.value;
-         setRecet((state) => ({...state, estado : diet}))
+         setRecet((state) => ({...state, state : diet}))
 };
 
 let arr = []
-const diet = receta.map((d)=> d.diets)
+const diet = recipe.map((d)=> d.diets)
 for(const d in diet){
     for(const n in diet[d]){
       arr.push(diet[d][n])       
@@ -54,11 +54,11 @@ for(const d in diet){
 arr = [...new Set(arr)];
 
     const [num, setNum] = useState(1);
-    const cantidad = 9;
-    const mult = cantidad * num;
-    const rest = mult - cantidad;
-    const fill = recet.estado !== 'All' ? receta.filter(x => x.diets.includes(recet.estado)) : receta;
-    let newRecipe = fill.slice(rest, mult); 
+    const quantity = 9;
+    const multiply = quantity * num;
+    const subtract = multiply - quantity;
+    const filters = recet.state !== 'All' ? recipe.filter(x => x.diets.includes(recet.state)) : recipe;
+    let newRecipe = filters.slice(subtract, multiply); 
 
     const pag = (n, e) =>{
         e.preventDefault()
@@ -77,11 +77,11 @@ arr = [...new Set(arr)];
     const orden = (e)=>{
         e.preventDefault();
         const value = e.target.value;
-       if(value === 'A-Z') setRecet((state) =>({...state, [value] : true, 'Z-A': false, original : false , '+Saludable': false, '-Saludable' : false }));
-       if(value === 'Z-A') setRecet((state) =>({...state, [value] : true, 'A-Z': false, original : false, '+Saludable': false, '-Saludable' : false}));
-       if(value === 'original') setRecet((state) =>({...state, [value] : true, 'Z-A': false, 'A-Z' : false, '+Saludable': false, '-Saludable' : false}));
-       if(value === '+Saludable') setRecet((state) =>({...state, [value] : true, 'Z-A': false, 'A-Z' : false, original : false, '-Saludable' : false}));
-       if(value === '-Saludable') setRecet((state) =>({...state, [value] : true, 'Z-A': false, 'A-Z' : false, '+Saludable': false, original : false,}));
+       if(value === 'A-Z') setRecet((state) =>({...state, [value] : true, 'Z-A': false, original : false , '+healthy': false, '-healthy' : false }));
+       if(value === 'Z-A') setRecet((state) =>({...state, [value] : true, 'A-Z': false, original : false, '+healthy': false, '-healthy' : false}));
+       if(value === 'original') setRecet((state) =>({...state, [value] : true, 'Z-A': false, 'A-Z' : false, '+healthy': false, '-healthy' : false}));
+       if(value === '+healthy') setRecet((state) =>({...state, [value] : true, 'Z-A': false, 'A-Z' : false, original : false, '-healthy' : false}));
+       if(value === '-healthy') setRecet((state) =>({...state, [value] : true, 'Z-A': false, 'A-Z' : false, '+healthy': false, original : false,}));
     }
 let p = newRecipe.map(x => x.name).sort()
 let t = [];
@@ -106,16 +106,16 @@ if(recet['Z-A'] === true){
     newRecipe = t.reverse();
 };
 
-if(recet['-Saludable'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthScore)
-if(recet['+Saludable'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthScore).reverse()
+if(recet['-healthy'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthScore)
+if(recet['+healthy'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthScore).reverse()
 
     return(<div className='Home'>
-        <Link to={'/'}><button>Inicio</button></Link>
-            <h1>Bienvenidos a recetas de la casa </h1>
-            <form onSubmit={(evento) => enviar(evento)}>
-                <label>Busca tu receta favorita</label>
+        <Link to={'/'}><button>start</button></Link>
+            <h1>Recipes </h1>
+            <form onSubmit={(evento) => send(evento)}>
+                <label>Look for your favorite recipe</label>
                 <input type="text" name='name'
-                 placeholder='Buscar' value={recet.name} onChange={(evento)=>{
+                 placeholder='search' value={recet.name} onChange={(evento)=>{
                     edit(evento)
                  }} />
                 <select name='select' onClick={(e)=> select(e)}> 
@@ -124,19 +124,19 @@ if(recet['+Saludable'] === true) newRecipe.sort((a,b)=> a.healthScore - b.health
                     i = i++
                    return <option key={i} value={x} > {x} </option> })}
                    </select>
-                <button type="submit" onClick={(evento) => enviar(evento)}>Buscar...</button>
+                <button type="submit" onClick={(evento) => send(evento)}>search...</button>
                 <select name='select' onClick={(e)=>orden(e)}>
                 <option value='original'> original </option>
-                <option value='A-Z'> Ordenar de A-Z </option>
-                <option value='Z-A'> Ordenar de Z-A </option>
-                <option value="+Saludable">Mas saludables</option>
-                <option value="-Saludable">Menos saludables</option>
+                <option value='A-Z'> Sort of the A-Z </option>
+                <option value='Z-A'> Sort of the Z-A </option>
+                <option value="+healthy">Healthier</option>
+                <option value="-healthy">less healthy</option>
                 </select>
             </form>
 
- <Pagina
- cantidad={cantidad}
- total={fill.length}
+ <Paginated
+ quantity={quantity}
+ total={filters.length}
  number={pag}
  prev = {prev}
  next = {next}
@@ -153,7 +153,7 @@ if(recet['+Saludable'] === true) newRecipe.sort((a,b)=> a.healthScore - b.health
             dishTypes = {x.dishTypes}
                 diets = {x.diets}
             />
-            }) : <p>loader...</p>}
+            }) : <p>loading...</p>}
         </div>)
 }
 

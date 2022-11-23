@@ -1,14 +1,14 @@
 import {
-    GET_RECETA,
-    GET_ID_RECETA,
+    GET_RECIPE,
+    GET_ID_RECIPE,
     GET_DIETS,
-    CLEAN_RECET,
+    CLEAN_RECIPE,
     DELETE, //extra
  } from '../Action/action.js';
 
  const initState = {
-    arr : [],
-    idArr : {},
+    newRecipes : [],
+    recipeId : {},
     diets : [],
  }
 
@@ -17,14 +17,14 @@ import {
 const rootReducer = (state = initState, action) =>{
 
     switch (action.type) {
-        case GET_RECETA : return {
+        case GET_RECIPE : return {
             ...state, 
-            arr : action.payload
+            newRecipes : action.payload
         };
 
-        case GET_ID_RECETA : return{
+        case GET_ID_RECIPE : return{
             ...state,
-              idArr : action.payload
+              recipeId : action.payload
         };
 
         case GET_DIETS : return{
@@ -33,11 +33,11 @@ const rootReducer = (state = initState, action) =>{
         }
         case DELETE : return{
             ...state,
-            arr : state.arr.filter(x => x.id !== action.payload)
+            newRecipes : state.newRecipes.filter(x => x.id !== action.payload)
         }
-        case CLEAN_RECET :  return{
+        case CLEAN_RECIPE :  return{
             ...state,
-            idArr : {},
+            recipeId : {},
         }
 
         default: return{...state}

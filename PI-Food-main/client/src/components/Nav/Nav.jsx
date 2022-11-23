@@ -6,9 +6,9 @@ const Nav = () =>{
 
     return(<> 
            <div className ='nav' >
-            <h1>Componente Nav </h1>
+            <h1>Welcome to save Recipes </h1>
                 <button><Link to={'/Home'}>Home</Link></button>
-                <button><Link to={'/Create'}>Crea tu receta</Link></button>
+                <button><Link to={'/Create'}>Create your recipe</Link></button>
           </div>
           </>)
 };

@@ -10,12 +10,6 @@
     height: 20px;
 }
 .Home button:focus{
-    background-color: rgba(225, 163, 29, 0.672);
-    color: rgb(233, 138, 14);
-    border: 1px rgba(250, 247, 34, 0.678) solid;
-}
-
-.Home button:hover{
     background-color: rgba(0, 0, 0, 0.533);
     color: antiquewhite;
     border: 1px greenyellow solid;
@@ -37,7 +31,7 @@
     margin-top: 2%;
 }
 
-.img{
+.Home img{
     border-radius: 12%;
     width: 400px;
 }
@@ -50,4 +44,8 @@
 }
 .Home li{
     color: antiquewhite;
+}
+.Home input,select{
+    background-color: rgb(91, 157, 91);
+    margin: 8px;
 }

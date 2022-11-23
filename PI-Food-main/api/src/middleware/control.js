@@ -4,15 +4,15 @@ const control = async (req, res, next) =>{
 
    const { name, summary , diets } = req.body;
    console.log(req.body);
-   if(!name || !summary || !diets) return res.status(401).send({ error : 'faltan parametros' })
-   let dietas;
+   if(!name || !summary || !diets) return res.status(401).send({ error : 'missing parameters' })
+   let diet;
    for(let i = 0; i < diets.length; i++){
-       dietas = await Diets.findByPk(diets[i])
-      if(!dietas) return res.status(404).send({ error : 'no existe dieta' })
+       diet = await Diets.findByPk(diets[i])
+      if(!diet) return res.status(404).send({ error : 'there is no diet' })
   };
-  if(!dietas) return res.status(404).send({ error : 'no existe dieta' })
-     const crearModelo = await Recipe.create(req.body)
-     await crearModelo.addDiets(diets)
+  if(!diet) return res.status(404).send({ error : 'there is no diet' })
+     const createModels = await Recipe.create(req.body)
+     await createModels.addDiets(diets)
       next();
 }
 

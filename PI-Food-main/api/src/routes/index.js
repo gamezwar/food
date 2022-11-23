@@ -19,10 +19,10 @@ router.get('/', async (req, res)=>{
 })
 
 
-router.get('/:idReceta',async (req, res) =>{
-    const { idReceta } = req.params;
+router.get('/:idRecet',async (req, res) =>{
+    const { idRecet } = req.params;
     try {
-         const detail = await idRecipes(idReceta)
+         const detail = await idRecipes(idRecet)
          res.status(200).json(detail)
     } catch (error) {
         res.status(400).send(error.message)
@@ -31,8 +31,8 @@ router.get('/:idReceta',async (req, res) =>{
 
 router.post('/', control, async (req, res)=>{
     try { 
-        const crear = await createRecipe(req.body)
-        res.status(200).json(crear)   
+        const create = await createRecipe(req.body)
+        res.status(200).json(create)   
     } catch (error) {}
 })
 

@@ -1,9 +1,9 @@
 import './App.css';
 import { Route } from 'react-router-dom'
-import Home from './componentes/Home/Home';
-import Create from './componentes/Crear_Receta/CrearReceta';
-import Nav from './componentes/Nav/Nav';
-import Detalle from './componentes/Detalle/Detalle';
+import Home from './components/Home/Home';
+import Create from './components/Create_Recipe/CreateRecipe';
+import Nav from './components/Nav/Nav';
+import Details from './components/Details/Details.jsx'
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       
        <Route exact path={'/Create'} render={() => {return <Create />}}/>
        
-       <Route exact path={'/detalle/:id'} component={Detalle}/>
+       <Route exact path={'/detail/:id'} component={Details}/>
 
     </div>
   );

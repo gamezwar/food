@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { getDiets} from '../../Redux/Action/action.js'
-import './crearReceta.css';
+import './createRecipe.css';
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ useEffect(()=>{
 },[dispatch]);
 
 const diets = useSelector(x => x.diets);
-    const [estado, setEstado] = useState({
+    const [state, setState] = useState({
         name : '',  
         summary : '',
         healthScore : '',
@@ -23,17 +23,17 @@ const diets = useSelector(x => x.diets);
     });
 
 const [err, setErr] = useState({
-    name : 'Ingrese nombre de la dieta',  
-    summary : 'Ingrese summary',
-    healthScore : 'Ingrese healthScore',
-    analyzedInstructions : 'Ingrese analyzedInstructions',
-    image : 'Ingrese image',
-    diets : 'Ingrese diets',
+    name : 'Enter the name of the recipe',  
+    summary : 'enter summary of the recipe',
+    healthScore : 'Enter health Score',
+    analyzedInstructions : 'Enter analyzed Instructions',
+    image : 'Enter image',
+    diets : 'Enter diets',
     disabled : true,
     crar : true
 });
 
-const validar = (error) =>{
+const validate = (error) =>{
 const {name ,summary, healthScore, image, disabled, analyzedInstructions, diets } = error;
 
 if( name === '' && summary === '' && 
@@ -48,77 +48,77 @@ if( name === '' && summary === '' &&
            const { value, name } = evento.target;
            let newE = err;
            switch(name){
-            case 'name' : newE.name = value.length < 3 ? 'Name debe tener mas de 2 caracteres' : '' || /<|>|{|}|]|#/.test(value) ? 'no puede contener valores extraños' : '';
+            case 'name' : newE.name = value.length < 3 ? 'Name must have more than two characters' : '' || /<|>|{|}|]|#/.test(value) ? 'it can not contain strange values' : '';
             break;
-            case 'summary': newE.summary = value.length < 6 ? 'Summary debe tener mas de 5 caracteres' : '';
+            case 'summary': newE.summary = value.length < 6 ? 'the summary must have more than five characters' : '';
             break;
-            case 'healthScore': newE.healthScore = value.length < 1 ? 'HealthScore debe tener almenos 1 caracteres' : '';
+            case 'healthScore': newE.healthScore = value.length < 1 ? 'health score level must be more than ten' : '';
             break;
             default:
                 break;
            }
-           setEstado((state) => ({...state, [name] : value }))
+           setState((state) => ({...state, [name] : value }))
            setErr((state) => ({...state, [name] : newE[name] }));
-           validar(err)
+           validate(err)
         };
 
-const pasoApaso = (e) => {
+const stepByStep = (e) => {
    e.preventDefault();
     const { value, name } = e.target;
     let newE = err.analyzedInstructions;
-     newE = value.length < 6 ? 'AnalyzedInstructions debe tener mas de 5 caracteres' : true;
-      chequeador(name, [value]);
+     newE = value.length < 6 ? 'Analyzed Instructions you must have more than five characters' : true;
+      checked(name, [value]);
       setErr((state) => ({...state, [name] : newE }));
-      validar(err)
+      validate(err)
 };
-    const chequeador = (name, value) =>{
-      setEstado((state)=>({...state, [name] : value}));
+    const checked = (name, value) =>{
+      setState((state)=>({...state, [name] : value}));
     
       let newE = err.diets;
-      newE = !value.length ? 'Diets almenos debe tener una dieta ' : true;
+      newE = !value.length ? 'at least you must have a diet' : true;
       validarError(name , newE)
-      validar(err)
+      validate(err)
     };
 
 const check = (evento) =>{
    const { value, name } = evento.target;
-   let diet = estado.diets.map(x => x);
+   let diet = state.diets.map(x => x);
    let idDiets = diet.filter(D => D === value);
 
    if(!idDiets.length) {
-    chequeador(name, [...diet, value]);
+    checked(name, [...diet, value]);
    }else{
     diet = diet.filter(x => x !== value);
-    chequeador(name, [...diet])
+    checked(name, [...diet])
    }
 };
 const validarError = (name, value) =>{
     setErr((state) => ({...state, [name] : value }));
     let errImg;
     if(name === 'image') {
-        errImg =  /[png,jpeg]/.test(value) ? '' : 'Imagen debe ser de tipo imagen';
+        errImg =  /[png,jpeg]/.test(value) ? '' : 'Image must be png or jpeg type';
         setErr((state) => ({...state, image : errImg }));
     }
-    validar(err)  
+    validate(err)  
 }
 
-const env =async (e) => {
+const send =async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:3001/recipes', estado)
+    await axios.post('http://localhost:3001/recipes', state)
  .then(Response => alert(Response.data))
  .catch(err => alert(err.data))
  
- setEstado((state)=>({...state, name : '', summary : '',
+ setState((state)=>({...state, name : '', summary : '',
                healthScore : '', analyzedInstructions : [], 
                image : '', diets : []}));
 
       setErr((state) => ({...state,
-        name : 'Ingrese nombre de la dieta',  
-        summary : 'Ingrese summary',
-        healthScore : 'Ingrese healthScore',
-        analyzedInstructions : 'Ingrese analyzedInstructions',
-        image : 'Ingrese image',
-        diets : 'Ingrese diets',
+        name : 'Enter the name of the diet',  
+        summary : 'enter summary of the recipe',
+        healthScore : 'Enter health Score',
+        analyzedInstructions : 'Enter analyzed Instructions',
+        image : 'Enter image',
+        diets : 'Enter diets',
         disabled : true,
         crar : false
      }));
@@ -127,34 +127,34 @@ const env =async (e) => {
 const imge = (e) =>{
     const { files, name, value } = e.target;
     let url = URL.createObjectURL(files[0]);
-    setEstado((state)=>({...state, image : url}));
+    setState((state)=>({...state, image : url}));
     validarError(name, value);
 }
 
-if(err.crar) return(<div className="crearRecet">
+if(err.crar) return(<div className="createRecipe">
             <Link to={'/Home'}><button>Home</button></Link>
-            <h1>Recetas</h1>
-            <form onSubmit={(e)=>env(e)}>
-                <label>Ingresa el nombre de la receta</label>
-                <input className={err.name ? 'err' : 'ok'} type="text" name ='name' value={estado.name} 
-                onChange={(e) => recipes(e)} placeholder='ingresa el nombre de la receta'/>
+            <h1>Recipes</h1>
+            <form onSubmit={(e)=>send(e)}>
+                <label>Enter the name of the recipe</label>
+                <input className={err.name ? 'err' : 'ok'} type="text" name ='name' value={state.name} 
+                onChange={(e) => recipes(e)} placeholder='Enter the name of the recipe'/>
                  <p className={err.name && "errP"}>{err.name}</p>
                 
-                <label>paso a paso</label>
+                <label>step by step</label>
                 <input className={err.analyzedInstructions.length ? 'err' : 'ok'} type="text" name="analyzedInstructions"
-                 value={estado.analyzedInstructions } onChange={(e)=> pasoApaso(e)} placeholder='ingresa el paso a paso'/>
+                 value={state.analyzedInstructions } onChange={(e)=> stepByStep(e)} placeholder='step by step'/>
                  <p className={err.analyzedInstructions && "errP"}>{err.analyzedInstructions}</p>
                
                 <label>summary</label>
-                <input className={err.summary ? 'err' : 'ok'} name="summary" value={estado.summary}
-                 onChange={(e) => recipes(e)} placeholder='ingresa el resumen de la receta'/> 
+                <input className={err.summary ? 'err' : 'ok'} name="summary" value={state.summary}
+                 onChange={(e) => recipes(e)} placeholder='Enter summary'/> 
                 <p className={err.summary && "errP"}>{err.summary}</p>
                 
-                <label>Agrega la imagen de la receta</label>
+                <label>Enter the recipe image </label>
                 <input type="file" name="image" className={err.image ? 'err' : 'ok'} onChange={(e)=>imge(e)} />
                 <p className={err.image && "errP"}>{err.image}</p>
                 
-                <ul className={err.diets.length && 'err'}>Dieta
+                <ul className={err.diets.length && 'err'}>Diets
                 <hr className="hr"/>
                 {diets ? diets.map((D) =>{
                     return   <li className="chek" key={D.id}>
@@ -170,21 +170,21 @@ if(err.crar) return(<div className="crearRecet">
                 }): null}</ul>
                 <p className={err.diets && "errP"}>{err.diets}</p>
 
-                <label>NIVEL_DE_COMIDA_SALUDABLE</label>
+                <label>Health score</label>
                 <input type="range" name="healthScore" className={err.healthScore ? 'err' : 'ok'}
-                   value={estado.healthScore} onChange={(e)=> recipes(e)} />
+                   value={state.healthScore} onChange={(e)=> recipes(e)} />
                  <p className={err.healthScore && "errP"}>{err.healthScore}</p>
 
-                <button className={err.disabled ? 'okB' : 'errB'} type="submit" disabled={err.disabled} >Enviar...</button>
+                <button className={err.disabled ? 'okB' : 'errB'} type="submit" disabled={err.disabled} >Send...</button>
             </form>
            </div>)
             return  (<div className="BTN">
-                       <h1>Deseas crear una nueva receta </h1>
+                       <h1>Want to create a new recipe </h1>
                         <button type="submit" onClick={()=> setErr(err => ({...err, crar : true}))} >
-                            Crear nueva receta
+                            Create new recipe
                         </button>
                         <button><Link to={'/Home'}>Home</Link></button>
-                        <button><Link to={'/'}>Inicio</Link></button>
+                        <button><Link to={'/'}>start</Link></button>
                    </div>)
 };
 
