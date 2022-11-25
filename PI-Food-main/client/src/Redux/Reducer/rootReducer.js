@@ -3,7 +3,6 @@ import {
     GET_ID_RECIPE,
     GET_DIETS,
     CLEAN_RECIPE,
-    DELETE, //extra
  } from '../Action/action.js';
 
  const initState = {
@@ -30,10 +29,6 @@ const rootReducer = (state = initState, action) =>{
         case GET_DIETS : return{
             ...state,
                   diets : action.payload
-        }
-        case DELETE : return{
-            ...state,
-            newRecipes : state.newRecipes.filter(x => x.id !== action.payload)
         }
         case CLEAN_RECIPE :  return{
             ...state,

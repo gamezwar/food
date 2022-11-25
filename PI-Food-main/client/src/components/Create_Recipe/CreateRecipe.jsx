@@ -156,20 +156,23 @@ if(err.crar) return(<div className="createRecipe">
                 
                 <ul className={err.diets.length && 'err'}>Diets
                 <hr className="hr"/>
+                <div>
                 {diets ? diets.map((D) =>{
                     return   <li className="chek" key={D.id}>
                                {D.name}
-                               <hr/>
+                               <div>
                                <input type='checkbox'
                                  className="chek"
                                  name='diets'
                                  value={D.id}
                                  onChange={(e) => check(e)}
                                  />
+                                </div>
                               </li>
-                }): null}</ul>
+                }): null}
+                </div>
+                </ul>
                 <p className={err.diets && "errP"}>{err.diets}</p>
-
                 <label>Health score</label>
                 <input type="range" name="healthScore" className={err.healthScore ? 'err' : 'ok'}
                    value={state.healthScore} onChange={(e)=> recipes(e)} />

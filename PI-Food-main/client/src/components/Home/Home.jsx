@@ -58,6 +58,7 @@ arr = [...new Set(arr)];
     const multiply = quantity * num;
     const subtract = multiply - quantity;
     const filters = recet.state !== 'All' ? recipe.filter(x => x.diets.includes(recet.state)) : recipe;
+    
     let newRecipe = filters.slice(subtract, multiply); 
 
     const pag = (n, e) =>{
@@ -109,7 +110,8 @@ if(recet['Z-A'] === true){
 if(recet['-healthy'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthScore)
 if(recet['+healthy'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthScore).reverse()
 
-    return(<div className='Home'>
+return(<div className='Home'>
+    <div className='contain'>
         <Link to={'/'}><button>start</button></Link>
             <h1>Recipes </h1>
             <form onSubmit={(evento) => send(evento)}>
@@ -133,16 +135,17 @@ if(recet['+healthy'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthSc
                 <option value="-healthy">less healthy</option>
                 </select>
             </form>
+     <div>
+      <Paginated
+        quantity={quantity}
+        total={filters.length}
+        number={pag}
+        prev = {prev}
+        next = {next}
+        state = {num} />
+     </div>
+    </div>
 
- <Paginated
- quantity={quantity}
- total={filters.length}
- number={pag}
- prev = {prev}
- next = {next}
- state = {num}
- />
- 
 {newRecipe ? newRecipe.map((x) =>{
             return <Card 
                 key = {x.id}
@@ -150,7 +153,7 @@ if(recet['+healthy'] === true) newRecipe.sort((a,b)=> a.healthScore - b.healthSc
                 healthScore = {x.healthScore}
                 image = {x.image}
                 name = {x.name}
-            dishTypes = {x.dishTypes}
+                dishTypes = {x.dishTypes}
                 diets = {x.diets}
             />
             }) : <p>loading...</p>}

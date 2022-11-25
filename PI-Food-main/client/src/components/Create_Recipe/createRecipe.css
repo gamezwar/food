@@ -76,8 +76,9 @@ margin-left: 30%;
 .BTN{
     width: 100%;
     height: 600px;
-    background-color: rgb(58, 209, 58);
+    background-color:rgb(36, 38, 36);
     margin: 1px;
+    color: greenyellow;
 }
 .BTN button{
     margin: 12px;

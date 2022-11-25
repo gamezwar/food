@@ -1,16 +1,20 @@
-.Home{
-    background-color: black;
+.Home {
+    background-color:rgb(36, 38, 36);
     color: antiquewhite;
     display: flex;
-    flex-direction: column;
+    flex-flow: wrap row;
+}
+.Home .contain{
+    width: 100%;
 }
 .Home button{
     margin:12px;
     background-color: chartreuse;
     height: 20px;
+    border-radius: 8px;
 }
 .Home button:focus{
-    background-color: rgba(0, 0, 0, 0.533);
+    background-color: rgb(36, 38, 36);
     color: antiquewhite;
     border: 1px greenyellow solid;
 }
@@ -21,22 +25,29 @@
 
 .Car{
     display: flex;
-    flex-direction: row;
-    width: 80%;
+    flex-flow: wrap row;
+    width: 300px;
     padding: 20px;
     border: 2px solid greenyellow;
     border-radius: 14px;
     text-align: center;
-    margin-left: 10%;
+    margin-left: 64px;
+    -ms-flex-align: center;
     margin-top: 2%;
+}
+
+.Car .Healthier{
+    color: greenyellow;
+    margin: 8px;
+}
+.Car .less_healthy{
+    color: rgb(226, 87, 87);
+    margin: 8px;
 }
 
 .Home img{
     border-radius: 12%;
-    width: 400px;
-}
-.title{
-    padding: 12px;
+    width: 300px;
 }
 
 .Home ul{
@@ -45,7 +56,13 @@
 .Home li{
     color: antiquewhite;
 }
-.Home input,select{
+.Home select{
     background-color: rgb(91, 157, 91);
     margin: 8px;
+    border-radius: 8px;
+}
+.Home input{
+    background-color: rgba(192, 251, 192, 0.698);
+    margin: 8px;
+    border-radius: 8px;
 }
